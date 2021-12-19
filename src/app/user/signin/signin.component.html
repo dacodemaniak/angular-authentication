@@ -13,7 +13,7 @@
 
         <mat-form-field fxLayoutAlign="center">
             <mat-label>User password</mat-label>
-            <input matInput formControlName="userPass">
+            <input matInput type="password" formControlName="userPass">
             <mat-error *ngIf="c.userPass.errors">
                 User password cannot be empty
             </mat-error>
