@@ -1,6 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
 
@@ -14,7 +15,8 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   public get c(): {[key: string]: AbstractControl} {
@@ -41,7 +43,9 @@ export class SigninComponent implements OnInit {
           take(1)
         )
         .subscribe((response: HttpResponse<any>) => {
-          console.log(`${JSON.stringify(response.body)}`);
+          if (response.status === 200) {
+            this.router.navigate(['/', 'dashboard', 'home']);
+          }
         });
     }
   }
