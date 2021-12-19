@@ -15,10 +15,11 @@ export class HasUserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.storageService.get()) {
+      this.router.navigate(['/', 'dashboard', 'home']);
       return false;
     }
 
-    this.router.navigate(['/', 'dashboard', 'home']);
+    
     return true;
   }
   
