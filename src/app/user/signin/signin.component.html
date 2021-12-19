@@ -1,1 +1,43 @@
-<p>signin works!</p>
+<div fxLayout="row" fxLayoutAlign="center">
+    <form
+        [formGroup]="signinForm"
+        (ngSubmit)="onSubmit()"
+    >
+        <mat-form-field fxLayoutAlign="center">
+            <mat-label>User name</mat-label>
+            <input matInput formControlName="userName">
+            <mat-error *ngIf="c.userName.errors">
+                Username cannot be empty
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxLayoutAlign="center">
+            <mat-label>User password</mat-label>
+            <input matInput type="password" formControlName="userPass">
+            <mat-error *ngIf="c.userPass.errors">
+                User password cannot be empty
+            </mat-error>
+        </mat-form-field>
+
+        <div fxLayoutAlign="center">
+            <button mat-raised-button color="primary" [disabled]="signinForm.invalid">
+                Sign In
+            </button>
+        </div>
+    </form>  
+</div>
+
+<div fxLayout="column" fxLayoutAlign="center" class="signin-links">
+    <div  fxFlex="100" fxLayoutAlign="center">
+        <a [routerLink]="['/', 'account', 'password-forgotten']">
+            Password forgotten ?
+        </a>
+    </div>
+
+    <div fxFlex="100" fxLayoutAlign="center">
+        <a [routerLink]="['/', 'account', 'signup']">
+            New ? Create an account
+        </a>
+    </div>
+</div>
+

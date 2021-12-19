@@ -1,0 +1,23 @@
+mat-toolbar {
+    div {
+        &.tabs-bar {
+            color: #fff;
+            button {
+                color: inherit;
+                &.active-menu-item {
+                    color: rgba(128, 128, 1278, .7);
+                }
+                .toolbar-icon {
+                    line-height: 0;
+                    color: inherit;
+                }
+                .toolbar-icon-text {
+                    line-height: 1.8;
+                    font-size: .7em;
+                    color: inherit;
+                } 
+            }
+        }
+    }
+
+}

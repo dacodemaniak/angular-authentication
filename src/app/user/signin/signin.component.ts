@@ -1,4 +1,9 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -6,10 +11,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
+  public signinForm: FormGroup = new FormGroup({});
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) { }
 
+  public get c(): {[key: string]: AbstractControl} {
+    return this.signinForm.controls;
+  }
+  
   ngOnInit(): void {
+    this.signinForm = this.formBuilder.group({
+      userName: [
+        '',
+        Validators.required
+      ],
+      userPass: [
+        '',
+        Validators.required
+      ]
+    })
+  }
+
+  public onSubmit(): void {
+    if (this.signinForm.valid) {
+      this.userService.signin(this.signinForm.value)
+        .pipe(
+          take(1)
+        )
+        .subscribe((response: HttpResponse<any>) => {
+          if (response.status === 200) {
+            this.router.navigate(['/', 'dashboard', 'home']);
+          }
+        });
+    }
   }
 
 }

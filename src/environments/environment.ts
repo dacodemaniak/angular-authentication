@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: "http://127.0.0.1:5000/",
+  storage: {
+    strategy: "session",
+    keys: {
+      user: "_TOKEN_"
+    }
+  }
 };
 
 /*
