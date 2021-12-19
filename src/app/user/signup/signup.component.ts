@@ -1,6 +1,9 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service';
 
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -11,7 +14,8 @@ export class SignupComponent implements OnInit {
   public signupForm: FormGroup = new FormGroup({});
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) { }
 
   public get c(): {[key: string]: AbstractControl} {
@@ -32,6 +36,14 @@ export class SignupComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    
+    if (this.signupForm.valid) {
+      this.userService.signup(this.signupForm.value)
+        .pipe(
+          take(1)
+        )
+        .subscribe((response: HttpResponse<any>) => {
+          console.log(`${JSON.stringify(response.body)}`);
+        });
+    }
   }
 }
