@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -22,6 +23,7 @@ import { FooterComponent } from './footer/footer.component';
     UiModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    HttpClientModule,
     HeaderComponent,
     FooterComponent
   ]
