@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HasUserGuard } from './guards/has-user.guard';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -17,11 +18,13 @@ export class UserRoutingModule {
     },
     {
       path: 'signin',
-      component: SigninComponent
+      component: SigninComponent,
+      canActivate: [HasUserGuard]
     },
     {
       path: 'signup',
-      component: SignupComponent
+      component: SignupComponent,
+      canActivate: [HasUserGuard]
     },
     {
       path: '**',
