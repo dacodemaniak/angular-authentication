@@ -24,6 +24,19 @@
             </mat-error>
         </mat-form-field>
 
+        <mat-form-field fxLayoutAlign="center">
+          <mat-label>Confirm</mat-label>
+          <input matInput type="password" formControlName="confirmPassword">
+      </mat-form-field>
+
+      <div class="validation-errors">
+        <ng-container>
+          <div class="error-message" *ngIf="signupForm.hasError('areEqual')">
+            Passwords don't match
+          </div>
+        </ng-container>
+      </div>
+
         <div fxLayoutAlign="center">
             <button mat-raised-button color="primary" [disabled]="signupForm.invalid">
                 Sign Up

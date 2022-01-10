@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 
 import { take } from 'rxjs/operators';
 import { UserNameValidator } from 'src/app/core/validators/username-validator';
+import { MustMatchValidator } from 'src/app/core/validators/must-match-validator';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -34,8 +35,16 @@ export class SignupComponent implements OnInit {
       userPass: [
         '',
         Validators.required
+      ],
+      confirmPassword: [
+        ''
       ]
-    })
+    },    {
+      validator: Validators.compose([
+        MustMatchValidator.areEqual('userPass', 'confirmPassword', { areEqual: false })
+      ])
+    }
+)
   }
 
   public onSubmit(): void {
