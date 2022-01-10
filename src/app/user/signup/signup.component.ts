@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { UserService } from '../services/user.service';
 
 import { take } from 'rxjs/operators';
+import { UserNameValidator } from 'src/app/core/validators/username-validator';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -15,7 +16,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private userNameValidator: UserNameValidator
   ) { }
 
   public get c(): {[key: string]: AbstractControl} {
@@ -26,7 +28,8 @@ export class SignupComponent implements OnInit {
     this.signupForm = this.formBuilder.group({
       userName: [
         '',
-        Validators.required
+        Validators.required,
+        this.userNameValidator.alreadyExists.bind(this.userNameValidator)
       ],
       userPass: [
         '',

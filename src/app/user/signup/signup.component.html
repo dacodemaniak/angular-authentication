@@ -6,8 +6,13 @@
         <mat-form-field fxLayoutAlign="center">
             <mat-label>User name</mat-label>
             <input matInput formControlName="userName">
-            <mat-error *ngIf="c.userName.errors">
-                Username cannot be empty
+            <mat-error *ngIf="c.userName.errors && c.userName.touched || c.userName.dirty">
+                <span *ngIf="c.userName.errors?.required">
+                  Username cannot be empty
+                </span>
+                <span *ngIf="c.userName.errors?.alreadyExists">
+                  Username was already used
+                </span>
             </mat-error>
         </mat-form-field>
 
@@ -24,5 +29,5 @@
                 Sign Up
             </button>
         </div>
-    </form>  
+    </form>
 </div>

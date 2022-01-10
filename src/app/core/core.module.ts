@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorageServiceFactory } from './services/storage-service-factory';
+import { UserNameValidator } from './validators/username-validator';
 
 
 
@@ -10,7 +11,8 @@ import { StorageServiceFactory } from './services/storage-service-factory';
     CommonModule
   ],
   providers: [
-    StorageServiceFactory
+    StorageServiceFactory,
+    UserNameValidator
   ]
 })
 export class CoreModule { }
